@@ -1,19 +1,16 @@
 # utils.py
-from passlib.context import CryptContext
-import hashlib
-import base64
-
-# Password hashing context
-pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
-
-def _pre_hash(password: str) -> str:
-    """Hash password with SHA-256 before bcrypt to bypass 72 character limit"""
-    return base64.b64encode(hashlib.sha256(password.encode('utf-8')).digest()).decode('utf-8')
+import bcrypt
 
 def hash_password(password: str) -> str:
     """Hash a password for storing."""
-    return pwd_context.hash(_pre_hash(password))
+    # Hash the password
+    pwd_bytes = password.encode('utf-8')
+    salt = bcrypt.gensalt()
+    hashed_password = bcrypt.hashpw(password=pwd_bytes, salt=salt)
+    return hashed_password.decode('utf-8')
 
 def verify_password(plain_password: str, hashed_password: str) -> bool:
     """Verify a stored password against a provided password."""
-    return pwd_context.verify(_pre_hash(plain_password), hashed_password)
+    password_byte_enc = plain_password.encode('utf-8')
+    hashed_password_bytes = hashed_password.encode('utf-8')
+    return bcrypt.checkpw(password=password_byte_enc, hashed_password=hashed_password_bytes)
