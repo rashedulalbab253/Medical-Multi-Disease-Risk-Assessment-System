@@ -20,10 +20,10 @@ A full-stack web application that uses **Machine Learning** to assess the risk o
 | Layer | Technology |
 |-------|-----------|
 | **Frontend** | Next.js, React, TypeScript, Tailwind CSS |
-| **Backend** | FastAPI (Python 3.12), Uvicorn |
-| **Database** | SQLite |
-| **ML Models** | Scikit-learn, CatBoost, LightGBM, XGBoost |
-| **AI Analysis** | Google Gemini API |
+| **Backend** | FastAPI 0.135.1 (Python 3.12.10), Uvicorn 0.41.0 |
+| **Database** | SQLite (via SQLAlchemy 2.0.48) |
+| **ML Models** | Scikit-learn 1.3.2, CatBoost 1.2.10, LightGBM 4.6.0, XGBoost 3.2.0 |
+| **AI Analysis** | Google Gemini API (google-generativeai 0.8.6) |
 
 ## 📦 Project Structure
 
@@ -54,8 +54,8 @@ Medical-Disease-Risk-Assessment-System/
 
 ### Prerequisites
 
-- **Python 3.12** ([Download](https://www.python.org/downloads/))
-- **Node.js 18+** ([Download](https://nodejs.org/))
+- **Python 3.12.10** ([Download](https://www.python.org/downloads/release/python-31210/))
+- **Node.js 18** ([Download](https://nodejs.org/))
 - **Git** ([Download](https://git-scm.com/))
 
 ---
