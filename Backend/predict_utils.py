@@ -2,8 +2,21 @@ import os
 import joblib
 import numpy as np
 
+# Map API disease names to actual model folder names
+DISEASE_FOLDER_MAP = {
+    "diabetes": "diabetes",
+    "stroke": "Stroke",
+    "parkinsons": "Parkinsons",
+    "thyroid": "Thyroid",
+    "depression": "Depression",
+    "hepatitis": "Hepatits",  # Note: original folder has typo
+    "heart": "Heart",
+    "kidney": "Kidney",
+}
+
 def load_model(disease_name):
-    model_path = f"models/{disease_name}/model.pkl"
+    folder = DISEASE_FOLDER_MAP.get(disease_name, disease_name)
+    model_path = f"models/{folder}/model.pkl"
     if not os.path.exists(model_path):
         raise FileNotFoundError(f"No model found for {disease_name}")
     

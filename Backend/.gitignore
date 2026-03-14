@@ -1,0 +1,16 @@
+# Virtual environment
+venv/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Database files
+*.db
+
+# Environment variables
+.env
+
+# Test files
+test_diseases.py
+test_results.txt
