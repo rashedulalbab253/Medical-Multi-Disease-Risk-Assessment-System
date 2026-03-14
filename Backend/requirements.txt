@@ -1,0 +1,11 @@
+fastapi
+sqlalchemy
+python-dotenv
+pydantic
+pymupdf
+google-generativeai
+pickle-mixin
+numpy
+joblib
+passlib
+scikit-learn==1.3.2

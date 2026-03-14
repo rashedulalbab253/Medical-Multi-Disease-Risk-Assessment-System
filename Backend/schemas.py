@@ -1,0 +1,150 @@
+# schemas.py
+from pydantic import BaseModel, Field, EmailStr
+from typing import Optional
+
+class DiabetesInput(BaseModel):
+    gender: int
+    age: float
+    hypertension: int
+    heart_disease: int
+    smoking_history: int
+    bmi: float
+    HbA1c_level: float
+    blood_glucose_level: int
+
+class StrokeInput(BaseModel):
+    gender: int
+    age: float
+    hypertension: int
+    heart_disease: int
+    ever_married: int
+    work_type: int
+    residence_type: int
+    avg_glucose_level: float
+    bmi: float
+    smoking_status: int
+class ParkinsonsInput(BaseModel):
+    age: int
+    gender: int
+    ethnicity: int
+    education_level: int
+    bmi: float
+    smoking: int
+    alcohol_consumption: float
+    physical_activity: float
+    diet_quality: float
+    sleep_quality: float
+    family_history_parkinsons: int
+    traumatic_brain_injury: int
+    hypertension: int
+    diabetes: int
+    depression: int
+    stroke: int
+    systolic_bp: float
+    diastolic_bp: float
+    cholesterol_total: float
+    cholesterol_ldl: float
+    cholesterol_hdl: float
+    cholesterol_triglycerides: float
+    updrs: float
+    moca: float
+    functional_assessment: float
+    tremor: int
+    rigidity: int
+    bradykinesia: int
+    postural_instability: int
+    speech_problems: int
+    sleep_disorders: int
+    constipation: int
+
+class ThyroidInput(BaseModel):
+    age: int
+    sex: int
+    thyroxine: int
+    queryonthyroxine: int
+    onantithyroidmedication: int
+    sick: int
+    pregnant: int
+    thyroidsurgery: int
+    I131treatment: int
+    queryhypothyroid: int
+    queryhyperthyroid: int
+    lithium: int
+    goitre: int
+    tumor: int
+    hypopituitary: int
+    psych: int
+    TSH: float
+    T3: float
+    T4: float
+    T4U: float
+    FTI: float
+
+class DepressionInput(BaseModel):
+    gender: int
+    age: float
+    city: int
+    academic_pressure: float
+    cgpa: float
+    study_satisfaction: float
+    sleep_duration: int
+    dietary_habits: int
+    suicidal_thoughts: int  # "Have you ever had suicidal thoughts ?" column
+    work_study_hours: float
+    financial_stress: float
+    family_history_mental_illness: int
+    new_degree: int
+
+class HepatitisInput(BaseModel):
+    age: int
+    sex: int
+    alb: float
+    che: float
+    chol: float
+    crea_log: float
+    bil_log: float
+    alt_log: float
+    ggt_log: float
+    ast_log: float
+    alp_log: float
+
+class HeartInput(BaseModel):
+    age: int
+    gender: int
+    chestpain: int
+    restingBP: int
+    serumcholesterol: int
+    fastingbloodsugar: int
+    restingrelectro: int
+    maxheartrate: int
+    exerciseangia: int
+    oldpeak: float
+    slope: int
+    noofmajorvessels: int
+
+class KidneyInput(BaseModel):
+    age: int
+    blood_pressure: float
+    specific_gravity: float
+    albumin: int
+    sugar: int
+    red_blood_cells: int
+    pus_cell: int
+    pus_cell_clumps: int
+    bacteria: int
+    blood_glucose_random: float
+    blood_urea: float
+    serum_creatinine: float
+    sodium: float
+    potassium: float
+    haemoglobin: float
+    packed_cell_volume: float
+    white_blood_cell_count: float
+    red_blood_cell_count: float
+    hypertension: int
+    diabetes_mellitus: int
+    coronary_artery_disease: int
+    appetite: int
+    peda_edema: int
+    aanemia: int
+
