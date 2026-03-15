@@ -173,7 +173,8 @@ export default function DiabetesPage() {
       console.log("Submitting form with data:", apiData)
 
       // Call the FastAPI backend for prediction without token
-      const predictionResponse = await fetch("http://localhost:8000/predict/diabetes", {
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"
+      const predictionResponse = await fetch(`${apiUrl}/predict/diabetes`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

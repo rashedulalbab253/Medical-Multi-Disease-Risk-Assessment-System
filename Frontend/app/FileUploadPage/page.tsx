@@ -40,7 +40,8 @@ export default function FileUploadPage() {
     formData.append("file", file)
   
     try {
-      const response = await fetch("http://localhost:8000/analyze-pdf", {
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"
+      const response = await fetch(`${apiUrl}/analyze-pdf`, {
         method: "POST",
         body: formData,
       })

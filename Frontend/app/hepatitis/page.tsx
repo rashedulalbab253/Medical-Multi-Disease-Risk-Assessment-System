@@ -203,7 +203,8 @@ export default function HepatitisPage() {
       }
       console.log("Submitting form with data:", apiData)
 
-      const predictionResponse = await fetch("http://localhost:8000/predict/hepatitis", {
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"
+      const predictionResponse = await fetch(`${apiUrl}/predict/hepatitis`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

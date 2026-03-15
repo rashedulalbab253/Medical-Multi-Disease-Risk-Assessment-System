@@ -179,7 +179,8 @@ export default function DepressionPage() {
       }
       console.log("Submitting form with data:", apiData)
 
-      const predictionResponse = await fetch("http://localhost:8000/predict/depression", {
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"
+      const predictionResponse = await fetch(`${apiUrl}/predict/depression`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

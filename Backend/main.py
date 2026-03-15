@@ -26,7 +26,7 @@ app = FastAPI(title="FastAPI Application")
 # CORS config
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000"],  # Frontend URL
+    allow_origins=["http://localhost:3000", "https://medical-multi-disease-risk-assessme.vercel.app"],  # Frontend URLs
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
