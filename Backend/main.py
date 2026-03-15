@@ -15,7 +15,7 @@ from predictor import DiseasePredictor
 
 # External libs
 import fitz
-import google.generativeai as genai
+from google import genai
 
 # Initialize tables
 Base.metadata.create_all(bind=engine)
@@ -35,8 +35,7 @@ app.add_middleware(
 # Configure Gemini AI
 import os
 API_KEY = os.getenv("GEMINI_API_KEY", "")
-genai.configure(api_key=API_KEY)
-model = genai.GenerativeModel(model_name="models/gemini-1.5-flash-latest")
+client = genai.Client(api_key=API_KEY)
 
 # Pydantic models
 class UserCreate(BaseModel):
@@ -119,7 +118,10 @@ async def analyze_pdf(file: UploadFile = File(...)):
             "suggested tests, and anything useful from a doctor’s perspective.\n\n"
             f"Medical Document:\n{text}"
         )
-        response = model.generate_content(prompt)
+        response = client.models.generate_content(
+            model='gemini-1.5-flash',
+            contents=prompt,
+        )
         return {"analysis": response.text}
 
     except Exception as e:
