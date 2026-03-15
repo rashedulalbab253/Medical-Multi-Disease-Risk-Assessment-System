@@ -15,7 +15,7 @@ from predictor import DiseasePredictor
 
 # External libs
 import fitz
-from google import genai
+from groq import Groq
 
 # Initialize tables
 Base.metadata.create_all(bind=engine)
@@ -32,10 +32,10 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Configure Gemini AI
+# Configure Groq AI
 import os
-API_KEY = os.getenv("GEMINI_API_KEY", "")
-client = genai.Client(api_key=API_KEY)
+API_KEY = os.getenv("GROQ_API_KEY", "")
+client = Groq(api_key=API_KEY)
 
 # Pydantic models
 class UserCreate(BaseModel):
@@ -118,11 +118,16 @@ async def analyze_pdf(file: UploadFile = File(...)):
             "suggested tests, and anything useful from a doctor’s perspective.\n\n"
             f"Medical Document:\n{text}"
         )
-        response = client.models.generate_content(
-            model='gemini-1.5-flash',
-            contents=prompt,
+        response = client.chat.completions.create(
+            messages=[
+                {
+                    "role": "user",
+                    "content": prompt,
+                }
+            ],
+            model="llama-3.3-70b-versatile",
         )
-        return {"analysis": response.text}
+        return {"analysis": response.choices[0].message.content}
 
     except Exception as e:
         return JSONResponse(status_code=500, content={"detail": f"PDF analysis failed: {str(e)}"})
