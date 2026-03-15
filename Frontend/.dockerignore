@@ -1,0 +1,7 @@
+# Frontend Docker ignore
+node_modules/
+.next/
+.env*
+.vercel
+npm-debug.log*
+.gitignore

@@ -1,2 +1,27 @@
+# Virtual environment
 env/
+venv/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Database files
+*.db
+
+# Environment files
+.env
+.env.local
+
+# IDE
+.idea/
+
+# OS files
+Thumbs.db
+.DS_Store
+
+# Test PDF
 Backend/test.pdf
+
+# Project structure dump
+project-structure.txt

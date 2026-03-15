@@ -1,0 +1,10 @@
+# Backend Docker ignore
+venv/
+__pycache__/
+*.pyc
+*.db
+.env
+test_diseases.py
+test_results.txt
+test.pdf
+.gitignore
