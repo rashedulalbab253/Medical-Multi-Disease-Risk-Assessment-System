@@ -1,19 +1,23 @@
-# 🩺 Medical Multi-Disease Risk Assessment System
+# 🏥 Medical Multi-Disease Risk Assessment System
 
-A full-stack web application that uses **Machine Learning** to assess the risk of multiple diseases. Users can input their health data and receive instant risk predictions powered by pre-trained ML models, along with AI-powered medical document analysis using **Google Gemini**.
+A comprehensive, full-stack AI healthcare application designed to assess the risk of multiple diseases based on user input and medical data. The system utilizes traditional Machine Learning models for accurate disease prediction and leverages large language models (LLMs) to analyze medical documents and provide expert-level conversational summaries.
 
-## 🔍 Supported Diseases
+## ✨ Key Features
 
-| Disease | Model Type |
-|---------|-----------|
-| Diabetes | Scikit-learn |
-| Stroke | Scikit-learn |
-| Parkinson's | CatBoost |
-| Thyroid | CatBoost |
-| Depression | Scikit-learn |
-| Hepatitis | Scikit-learn |
-| Heart Disease | Scikit-learn |
-| Chronic Kidney Disease | Scikit-learn |
+- **🩺 Multi-Disease Prediction:** Assess the risk factors for 8 critical conditions:
+  - Diabetes
+  - Stroke
+  - Parkinson's Disease
+  - Thyroid Disorders
+  - Depression
+  - Hepatitis
+  - Heart Disease
+  - Chronic Kidney Disease
+- **📄 AI Medical Report Analysis:** Upload medical PDFs to automatically extract diagnoses, medications, patient history, and suggested tests using deep LLM document analysis (Powered by **Groq & Llama-3**).
+- **🤖 Intelligent AI Summaries:** Generates personalized, natural-language summaries explaining the assessment results to patients using **Google Gemini API**.
+- **🔐 Secure Authentication:** Complete user registration and login system with encrypted passwords using bcrypt and JWT/Session management.
+- **⚡ Modern UI/UX:** A responsive, highly interactive frontend built with Next.js and Tailwind CSS.
+- **🚀 High-Performance Backend:** Built on FastAPI to ensure rapid ML model inference and completely async API handling.
 
 ## 🛠️ Tech Stack
 
@@ -23,7 +27,7 @@ A full-stack web application that uses **Machine Learning** to assess the risk o
 | **Backend** | FastAPI 0.135.1 (Python 3.12.10), Uvicorn 0.41.0 |
 | **Database** | SQLite (via SQLAlchemy 2.0.48) |
 | **ML Models** | Scikit-learn 1.3.2, CatBoost 1.2.10, LightGBM 4.6.0, XGBoost 3.2.0 |
-| **AI Analysis** | Google Gemini API (google-generativeai 0.8.6) |
+| **AI & Cloud** | Google Gemini API, Groq API (Llama-3) |
 
 ## 📦 Project Structure
 
@@ -55,7 +59,7 @@ Medical-Disease-Risk-Assessment-System/
 ### Prerequisites
 
 - **Python 3.12.10** ([Download](https://www.python.org/downloads/release/python-31210/))
-- **Node.js 18** ([Download](https://nodejs.org/))
+- **Node.js 18+** ([Download](https://nodejs.org/))
 - **Git** ([Download](https://git-scm.com/))
 
 ---
@@ -106,6 +110,9 @@ ACCESS_TOKEN_EXPIRE_MINUTES=60
 
 # Google Gemini API Key (get one from https://aistudio.google.com/)
 GEMINI_API_KEY=your_gemini_api_key_here
+
+# Groq API Key (get one from https://console.groq.com/)
+GROQ_API_KEY=your_groq_api_key_here
 ```
 
 #### Start the Backend Server
@@ -135,6 +142,11 @@ npm install --legacy-peer-deps
 npm run dev
 ```
 
+Remember to configure your frontend environment variables. Create a `.env.local` file inside the `Frontend/` folder:
+```env
+NEXT_PUBLIC_API_URL=http://localhost:8000
+```
+
 The frontend will be running at: **http://localhost:3000**
 
 ---
@@ -162,23 +174,26 @@ Then open **http://localhost:3000** in your browser.
 2. **Log In** — Use your email and password to log in.
 3. **Select a Disease** — Choose from 8 available disease risk assessments.
 4. **Fill the Form** — Enter your health data (age, BMI, blood pressure, etc.).
-5. **Get Results** — Receive an instant **High Risk** or **Low Risk** prediction.
-6. **PDF Analysis** — Upload a medical PDF for AI-powered analysis using Google Gemini.
+5. **Get Results** — Receive an instant **High Risk** or **Low Risk** prediction along with an AI summary of factors.
+6. **PDF Analysis** — Upload a medical PDF for AI-powered analysis to get structured insights.
 
 ## ⚙️ Troubleshooting
 
 | Problem | Solution |
 |---------|----------|
 | `ModuleNotFoundError` | Make sure you activated the virtual environment and ran `pip install -r requirements.txt` |
-| `Failed to fetch` on frontend | Ensure the backend server is running on port 8000 |
+| `Failed to fetch` on frontend | Ensure the backend server is running on port 8000 (`NEXT_PUBLIC_API_URL` is set) |
 | `scikit-learn` unpickling errors | You must use `scikit-learn==1.3.2` (the version the models were trained with) |
 | `npm install` errors | Try `npm install --legacy-peer-deps` |
 | Database issues | The SQLite database file (`auth_db.db`) is created automatically on first run |
 
+## 🤝 Contributing
+Contributions, issues, and feature requests are welcome!
+
 ## 📄 License
 
-This project is for educational purposes.
+This project is intended for educational purposes.
 
 ---
 
-Made with ❤️ for health awareness and disease prevention.
+Made with ❤️ by Rashedul Albab.
