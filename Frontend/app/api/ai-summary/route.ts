@@ -4,9 +4,9 @@ export async function POST(request: Request) {
   try {
     const { disease, parameters, prediction, probability } = await request.json()
 
-    // Check if we have the API key
-    if (!process.env.GEMINI_API_KEY) {
-      return NextResponse.json({ error: "Gemini API key not configured" }, { status: 500 })
+    // Check if we have at least one API key
+    if (!process.env.GROQ_API_KEY && !process.env.GEMINI_API_KEY) {
+      return NextResponse.json({ error: "No AI API key configured. Set GROQ_API_KEY or GEMINI_API_KEY." }, { status: 500 })
     }
 
     // Create a prompt based on the disease type and parameters
