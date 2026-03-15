@@ -39,7 +39,7 @@ export default function SignupPage() {
       const data = await response.json()
 
       if (!response.ok) {
-        throw new Error(data.message || "Signup failed")
+        throw new Error(data.detail || "Signup failed")
       }
 
       // Redirect to login page after successful signup
