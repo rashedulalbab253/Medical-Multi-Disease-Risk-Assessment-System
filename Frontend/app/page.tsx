@@ -124,9 +124,11 @@ export default function Home() {
         </section>
       </main>
       <footer className="border-t py-6">
-        <div className="container flex flex-col items-center justify-between gap-4 md:flex-row">
-          <p className="text-center text-sm text-muted-foreground md:text-left">
-            &copy; {new Date().getFullYear()} HealthPredict. All rights reserved.
+        <div className="container flex flex-col items-center justify-center gap-2">
+          <p className="text-center text-sm text-muted-foreground tracking-wide">
+            &copy; {new Date().getFullYear()}{" "}
+            <span className="font-semibold text-foreground">Rashedul Albab</span>
+            . All rights reserved.
           </p>
         </div>
       </footer>
