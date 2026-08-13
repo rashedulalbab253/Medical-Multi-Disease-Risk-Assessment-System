@@ -308,10 +308,28 @@ Please provide a medically sound, compassionate 150-200 word summary explaining 
 (Note: this is an automated general response as specific parameter mapping was unavailable).`
     }
 
-    // Primary: Use Groq API (OpenAI-compatible format)
+    // Primary: Use Gemini 3.7 Flash API
     let summaryText = "Unable to extract summary. Please try again."
 
-    if (process.env.GROQ_API_KEY) {
+    if (process.env.GEMINI_API_KEY) {
+      const response = await fetch("https://generativelanguage.googleapis.com/v1beta/models/gemini-3.7-flash:generateContent?key=" + process.env.GEMINI_API_KEY, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] }),
+      })
+
+      if (!response.ok) {
+        const errorText = await response.text()
+        console.error("Gemini API Error:", errorText)
+        throw new Error(`Failed to generate summary: ${response.status} ${response.statusText}`)
+      }
+
+      const data = await response.json()
+      if (data.candidates?.[0]?.content?.parts?.[0]) {
+        summaryText = data.candidates[0].content.parts[0].text
+      }
+    } else if (process.env.GROQ_API_KEY) {
+      // Fallback: Use Groq API (OpenAI-compatible format)
       const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
         method: "POST",
         headers: {
@@ -336,26 +354,8 @@ Please provide a medically sound, compassionate 150-200 word summary explaining 
       if (data.choices && data.choices[0] && data.choices[0].message) {
         summaryText = data.choices[0].message.content
       }
-    } else if (process.env.GEMINI_API_KEY) {
-      // Fallback: Use Gemini API
-      const response = await fetch("https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=" + process.env.GEMINI_API_KEY, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] }),
-      })
-
-      if (!response.ok) {
-        const errorText = await response.text()
-        console.error("Gemini API Error:", errorText)
-        throw new Error(`Failed to generate summary: ${response.status} ${response.statusText}`)
-      }
-
-      const data = await response.json()
-      if (data.candidates?.[0]?.content?.parts?.[0]) {
-        summaryText = data.candidates[0].content.parts[0].text
-      }
     } else {
-      throw new Error("No AI API key configured. Set GROQ_API_KEY or GEMINI_API_KEY in .env.local")
+      throw new Error("No AI API key configured. Set GEMINI_API_KEY or GROQ_API_KEY in .env.local")
     }
 
     return NextResponse.json({ summary: summaryText })
