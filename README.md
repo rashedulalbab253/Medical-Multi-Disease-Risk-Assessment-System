@@ -15,8 +15,8 @@ An AI-powered, full-stack healthcare web application that predicts the risk of *
 | Feature | Description |
 |---------|-------------|
 | 🩺 **Multi-Disease Prediction** | Risk assessment for Diabetes, Stroke, Parkinson's, Thyroid, Depression, Hepatitis, Heart Disease & Kidney Disease |
-| 📄 **AI Medical Report Analysis** | Upload medical PDFs for automatic extraction of diagnoses, medications & risk factors (Powered by **Groq & Llama-3**) |
-| 🤖 **Intelligent AI Summaries** | Natural-language health summaries explaining results to patients (Powered by **Google Gemini API**) |
+| 📄 **AI Medical Report Analysis** | Upload medical PDFs for automatic extraction of diagnoses, medications & risk factors (Powered by **Groq & Llama-3.3**) |
+| 🤖 **Intelligent AI Summaries** | Natural-language health summaries explaining results to patients (Primary: **Google Gemini 3.7 Flash**, Fallback: **Groq Llama-3.3 70B**) |
 | 🔐 **Secure Authentication** | User registration & login with bcrypt-encrypted passwords |
 | ⚡ **Modern UI/UX** | Responsive, interactive interface built with Next.js & Tailwind CSS |
 | 🚀 **High-Performance API** | FastAPI backend with async request handling and Swagger docs |
@@ -46,7 +46,13 @@ An AI-powered, full-stack healthcare web application that predicts the risk of *
 | **Backend** | FastAPI 0.135.1, Uvicorn 0.41.0, Python 3.12 |
 | **Database** | SQLite via SQLAlchemy 2.0.48 |
 | **ML Models** | Scikit-learn 1.3.2, CatBoost 1.2.10, LightGBM 4.6.0, XGBoost 3.2.0 |
-| **AI & Cloud** | Google Gemini API, Groq API (Llama-3.3-70B) |
+| **AI & Cloud** | Google Gemini 3.7 Flash (Primary), Groq API with Llama-3.3-70B (Fallback) |
+
+---
+
+## 🏛️ System Architecture
+
+![System Architecture](architecture.jpg)
 
 ---
 
