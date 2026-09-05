@@ -122,16 +122,33 @@ async def analyze_pdf(file: UploadFile = File(...)):
             "suggested tests, and anything useful from a doctor’s perspective.\n\n"
             f"Medical Document:\n{text}"
         )
-        response = client.chat.completions.create(
-            messages=[
-                {
-                    "role": "user",
-                    "content": prompt,
-                }
-            ],
-            model="llama-3.3-70b-versatile",
-        )
-        return {"analysis": response.choices[0].message.content}
+        
+        candidate_models = ["qwen/qwen3.8-27b", "openai/gpt-oss-120b", "groq/compound-mini", "llama-3.3-70b-versatile"]
+        analysis_content = None
+        last_err = None
+
+        for model_name in candidate_models:
+            try:
+                response = client.chat.completions.create(
+                    messages=[
+                        {
+                            "role": "user",
+                            "content": prompt,
+                        }
+                    ],
+                    model=model_name,
+                )
+                if response.choices and response.choices[0].message and response.choices[0].message.content:
+                    analysis_content = response.choices[0].message.content
+                    break
+            except Exception as e:
+                last_err = e
+                continue
+
+        if not analysis_content:
+            raise Exception(f"All AI models failed: {last_err}")
+
+        return {"analysis": analysis_content}
 
     except Exception as e:
         return JSONResponse(status_code=500, content={"detail": f"PDF analysis failed: {str(e)}"})
