@@ -95,7 +95,7 @@ flowchart TD
     end
 
     UI --> Forms & PDFUpload & AIChat
-    Forms -->|POST /predict/{disease}| Router
+    Forms -->|POST /predict/:disease| Router
     PDFUpload -->|POST /analyze-pdf| Router
     AIChat -->|POST /api/ai-assistant| GeminiAPI
     AIChat -.->|Fallback| GroqAPI
